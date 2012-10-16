@@ -23,3 +23,4 @@
   * Старайтесь не делать копипаст функций, подмайте как их можно агрегировать (Factory pattern?)
   * Необходимо выводить результаты выборки в консоль браузера `console.log()`
   [Как открыть консоль](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
+  * JSDoc, JSLint, UTF-8
