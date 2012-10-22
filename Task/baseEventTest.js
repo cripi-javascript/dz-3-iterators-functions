@@ -1,157 +1,133 @@
-﻿module( "test simple SQL" );
+﻿/*global module: true*/
+/*global test: true*/
+/*global ok: true*/
+/*global equal: true*/
+/*global initTestBase: true*/
+module("test simple SQL");
 test('pastEventBase()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
-    Date =  function () {
-        return new realDate("September 13, 2012 12:00:00");
+    var testBase = initTestBase(), RealDate = Date, pastEventbase;
+    Date = function () {
+        return new RealDate("September 13, 2012 12:00:00");
     };
-    var pastEventbase = testBase.pastEventBase();
-    ok(pastEventbase.events.length == 2);
-    ok(pastEventbase.events.some(function(event) {
-        return event.id == 15;
+    pastEventbase = testBase.pastEventBase();
+    equal(pastEventbase.events.length, 2);
+    ok(pastEventbase.events.some(function (event) {
+        return event.id === 15;
     }));
-    ok(pastEventbase.events.some(function(event) {
-        return event.id == 17;
+    ok(pastEventbase.events.some(function (event) {
+        return event.id === 17;
     }));
-    Date = realDate;
-    
+    Date = RealDate;
 });
 test('nextEventBase()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
+    var testBase = initTestBase(), RealDate = Date, nextEventBase;
     Date =  function () {
-        return new realDate("November 1, 2012 12:00:00");
+        return new RealDate("November 1, 2012 12:00:00");
     };
-    var nextEventBase = testBase.nextEventBase();
-    ok(nextEventBase.events.length == 2);
-    ok(nextEventBase.events.some(function(event) {
-        return event.id == 19;
+    nextEventBase = testBase.nextEventBase();
+    equal(nextEventBase.events.length, 2);
+    ok(nextEventBase.events.some(function (event) {
+        return event.id === 19;
     }));
-    ok(nextEventBase.events.some(function(event) {
-        return event.id == 20;
+    ok(nextEventBase.events.some(function (event) {
+        return event.id === 20;
     }));
-    Date = realDate;
+    Date = RealDate;
 });
-
 test('nowEventBase()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
+    var testBase = initTestBase(), RealDate = Date, nowEventbase;
     Date =  function () {
-        return new realDate("September 13, 2012 12:00:00");
+        return new RealDate("September 13, 2012 12:00:00");
     };
-    var nowEventbase = testBase.nowEventBase();
-    ok(nowEventbase.events.length == 1);
-    ok(nowEventbase.events.some(function(event) {
-        return event.id == 16;
+    nowEventbase = testBase.nowEventBase();
+    equal(nowEventbase.events.length, 1);
+    ok(nowEventbase.events.some(function (event) {
+        return event.id === 16;
     }));
-    Date = realDate;
-    
+    Date = RealDate;
 });
-
 test('withFriend("Alexander.Mangin")', function () {
     "use strict";
-    var testBase = initTestBase();
-    var eventWithFriendBase = testBase.withFriend({name: "Alexander.Mangin"});
-    ok(eventWithFriendBase.events.length == 1);
-    ok(eventWithFriendBase.events.some(function(event) {
-        return event.id == 16;
+    var testBase = initTestBase(), eventWithFriendBase = testBase.withFriend({name: "Alexander.Mangin"});
+    equal(eventWithFriendBase.events.length, 1);
+    ok(eventWithFriendBase.events.some(function (event) {
+        return event.id === 16;
     }));
-    
 });
-
 test('getEventAfterMonth()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
+    var testBase = initTestBase(), RealDate = Date, eventAfterMonthbase;
     Date =  function (param1, param2, param3) {
         if (param1 && param2 && param3) {
-            return new realDate(param1, param2, param3);
+            return new RealDate(param1, param2, param3);
         }
-        else {
-            return new realDate("October 1, 2012 12:00:00");
-        }
+        return new RealDate("October 1, 2012 12:00:00");
     };
-    var eventAfterMonthbase = testBase.getEventAfterMonth();
-    ok(eventAfterMonthbase.events.length == 2);
-    ok(eventAfterMonthbase.events.some(function(event) {
-        return event.id == 19;
+    eventAfterMonthbase = testBase.getEventAfterMonth();
+    equal(eventAfterMonthbase.events.length, 2);
+    ok(eventAfterMonthbase.events.some(function (event) {
+        return event.id === 19;
     }));
-    ok(eventAfterMonthbase.events.some(function(event) {
-        return event.id == 20;
+    ok(eventAfterMonthbase.events.some(function (event) {
+        return event.id === 20;
     }));
-    Date = realDate;
-    
+    Date = RealDate;
 });
-
 test('getEventAfterDay()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
+    var testBase = initTestBase(), RealDate = Date, eventAfterDaybase;
     Date =  function (param1, param2, param3) {
         if (param1 && param2 && param3) {
-            return new realDate(param1, param2, param3);
+            return new RealDate(param1, param2, param3);
         }
-        else {
-            return new realDate("November 1, 2012 12:00:00");
-        }
+        return new RealDate("November 1, 2012 12:00:00");
     };
-    var eventAfterDaybase = testBase.getEventAfterDay();
-    ok(eventAfterDaybase.events.length == 2);
-    ok(eventAfterDaybase.events.some(function(event) {
-        return event.id == 19;
+    eventAfterDaybase = testBase.getEventAfterDay();
+    equal(eventAfterDaybase.events.length, 2);
+    ok(eventAfterDaybase.events.some(function (event) {
+        return event.id === 19;
     }));
-    ok(eventAfterDaybase.events.some(function(event) {
-        return event.id == 20;
+    ok(eventAfterDaybase.events.some(function (event) {
+        return event.id === 20;
     }));
-    Date = realDate;
-    
+    Date = RealDate;
 });
-
 test('getEventAfterWeek()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var realDate = Date;
+    var testBase = initTestBase(), RealDate = Date, eventAfterWeekbase;
     Date =  function (param1) {
         if (param1) {
-            return new realDate(param1);
+            return new RealDate(param1);
         }
-        else {
-            return new realDate("October 28, 2012 12:00:00");
-        }
+        return new RealDate("October 28, 2012 12:00:00");
     };
-    var eventAfterWeekbase = testBase.getEventAfterWeek();
-    ok(eventAfterWeekbase.events.length == 1);
-    ok(eventAfterWeekbase.events.some(function(event) {
-        return event.id == 19;
+    eventAfterWeekbase = testBase.getEventAfterWeek();
+    equal(eventAfterWeekbase.events.length, 1);
+    ok(eventAfterWeekbase.events.some(function (event) {
+        return event.id === 19;
     }));
-    Date = realDate;
-    
+    Date = RealDate;
 });
-
 test('sortByStar()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var sortByStarsEventbase = testBase.sortByStars();
-    ok(testBase.events.length === sortByStarsEventbase.events.length);
-    ok(sortByStarsEventbase.events[0].stars == 5);
-    ok(sortByStarsEventbase.events[1].stars == 5);    
+    var testBase = initTestBase(), sortByStarsEventbase = testBase.sortByStars();
+    equal(testBase.events.length, sortByStarsEventbase.events.length);
+    ok(sortByStarsEventbase.events[0].stars === 5);
+    ok(sortByStarsEventbase.events[1].stars === 5);
 });
-
 test('sortByDate()', function () {
     "use strict";
-    var testBase = initTestBase();
-    var sortByDateEventbase = testBase.sortByDate();
-    ok(testBase.events.length === sortByDateEventbase.events.length);
-    ok(sortByDateEventbase.events[0].id == 15);
-    ok(sortByDateEventbase.events[1].id == 17);    
+    var testBase = initTestBase(), sortByDateEventbase = testBase.sortByDate();
+    equal(testBase.events.length, sortByDateEventbase.events.length);
+    ok(sortByDateEventbase.events[0].id === 15);
+    ok(sortByDateEventbase.events[1].id === 17);
 });
-
-function initTestBase()
-{
-    var bestOfSweetsDateStart = new Date("October 10, 2012 00:00:00"),
+function initTestBase() {
+    "use strict";
+    var bestOfSweetsDateStart = new Date("October 10, 2012 00:00:00"), 
     bestOfSweetsDateFinish = new Date("October 14, 2012 23:59:59"), 
     bestOfSweets = new Event(bestOfSweetsDateStart, bestOfSweetsDateFinish, "BestOfSweets", 1),
     сirioDeNazareDateStart = new Date("October 8, 2012 00:00:00"),
@@ -211,7 +187,6 @@ function initTestBase()
     nationUnitionDateStart = new Date("November 4, 2012 00:00:00"),
     nationUnitionDateDateFinish = new Date("November 4, 2012 23:59:59"), 
     nationUnition = new Event(nationUnitionDateStart, nationUnitionDateDateFinish, 'День нароного единства', 20);
-    
     bestOfSweets.setLocation({gps :{x : 15, y : 189, name : "Австрия, Бургенланд - Айзенштадте, Фестиваль сладких вин"}});
     bestOfSweets.leaveMark(2);
     сirioDeNazare.setLocation({gps :{x : 45, y : 133, name : "Бразилия, Белен, Фестиваль Cirio De Nazare"}});
@@ -248,8 +223,7 @@ function initTestBase()
     teacherDay.setLocation({gps :{x : 45, y : 133, name : "Вселенная, Земля, День учителя"}});
     securiteDay.setLocation({gps :{x : 45, y : 133, name : "Вселенная, Земля, День защиты информации"}});
     nationUnition.setLocation({gps :{x : 45, y : 133, name : "Вселенная, Земля, День народного единства"}});
-    
-    return new BaseEvent([    bestOfSweets, сirioDeNazare, vinesDay, theBlackCountry, oktoberFest, francfurtBook
+    return new BaseEvent([bestOfSweets, сirioDeNazare, vinesDay, theBlackCountry, oktoberFest, francfurtBook
     , aida, paradeOfLove, sukkot, fishFestival, chocolateFestival, digitalArtFestival, fatherDays,
     bearWeekend, teaFestival, programmerDay, knowDayDate, teacherDay, securiteDay, nationUnition]);
 }

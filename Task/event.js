@@ -4,8 +4,10 @@
  * @param {start} - is start event
  * @param {end} - is end event
  * @param {location} - is location event
+ * @param {location} - is id
  * @field {start} - is start event
  * @field {end} - is end event
+ * @field {id} - is id
  * @field {location} - location - is gps and name of event's place
  * @field {participants} - participants - array of participants
  * @field {stars} - is assess the importance of the event
