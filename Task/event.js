@@ -13,7 +13,7 @@
  * @method {setLocation} - is setter for location's field
  * @method {leaveMark} - is setter for stars's field (0,1,2,3,4,5 - допустимые значения)
  */
-function Event(start, end, location) {
+function Event(start, end, location, id) {
     "use strict";
     var dateValidator = function (date) {
         if (Object.prototype.toString.call(date) === "[object Date]") {
@@ -38,13 +38,16 @@ function Event(start, end, location) {
         "gps": {x: 0, y: 0},
         "nameLocation": "Earth"
     };
+    id = id || Math.random();
     return {
+        "id": id,
         "start": start,
         "end": end,
         "location": location,
         "participants": [],
         "stars": 0,
         "cost": 0,
+        "parties": [],
         "setLocation": function (gps, name) {
             if (typeof gps !== "undefined"  && typeof gps.x !== "undefined" && typeof gps.y !== "undefined" && typeof name === "string") {
                 this.location.gps = gps;

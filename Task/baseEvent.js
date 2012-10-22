@@ -1,40 +1,96 @@
-function BaseEvent()
+п»їfunction BaseEvent(events)
 {
-    var bestOfSweetsDateStart = new Date("October 10, 2012 00:00:00"),
-    bestOfSweetsDateFinish = new Date("October 14, 2012 23:59:59"), 
-    bestOfSweets = new Event(bestOfSweetsDateStart, bestOfSweetsDateFinish, "BestOfSweets")],
-    сirioDeNazareDateStart = new Date("October 8, 2012 00:00:00"),
-    сirioDeNazareDateFinish = new Date("October 15, 2012 23:59:59"), 
-    сirioDeNazare = new Event(сirioDeNazareDateStart, сirioDeNazareDateFinish, "Cirio De Nazare")],
-    vinesDayDateStart = new Date("October 4, 2012 00:00:00"),
-    vinesDayDateFinish = new Date("October 6, 2012 23:59:59"), 
-    vinesDay = new Event(vinesDayDateStart, vinesDayDateFinish, "День вина")],
-    theBlackCountryDateStart = new Date("October 31, 2012 00:00:00"),
-    theBlackCountryDateFinish = new Date("November 1, 2012 23:59:59"), 
-    theBlackCountry = new Event(theBlackCountryDateStart, theBlackCountryDateFinish, 'Вкус "Черной страны"')],
-    oktoberFestDateStart = new Date("September 24, 2012 00:00:00"),
-    oktoberFestDateFinish = new Date("October 8, 2012 23:59:59"), 
-    oktoberFest = new Event(oktoberFestDateStart, oktoberFestDateFinish, 'OktoberFest')],
-    francfurtBookDateStart = new Date("October 15, 2012 00:00:00"),
-    francfurtBookDateFinish = new Date("October 20, 2012 23:59:59"), 
-    francfurtBook = new Event(francfurtBookDateStart, francfurtBookDateFinish, 'Франкфуртская международная книжная ярмарка')],
-    aidaDateStart = new Date("October 12, 2012 00:00:00"),
-    aidaDateFinish = new Date("October 27, 2012 23:59:59"), 
-    aida = new Event(aidaDateStart, aidaDateFinish, '"Аида" у великих пирамид, Гиза')],
-    paradeOfLoveDateStart = new Date("October 3, 2012 14:00:00"),
-    paradeOfLoveDateFinish = new Date("October 3, 2012 22:00:00"), 
-    paradeOfLove = new Event(aidaDateStart, aidaDateFinish, 'Парад любви')],
-    sukkotDateStart = new Date("October 3, 2012 14:00:00"),
-    sukkotDateFinish = new Date("October 3, 2012 22:00:00"), 
-    sukkot = new Event(aidaDateStart, aidaDateFinish, 'Парад любви')],
+    this.events = events;
+    //РїСЂРѕРїСѓС‰РµРЅРЅС‹Рµ, С‚РµРєСѓС‰РёРµ, Р±СѓРґСѓС‰РёРµ СЃРѕР±С‹С‚РёСЏ 
+    this.pastEventBase = function () {
+        var currentDate = new Date();
+        var needs = this.events.filter(function(event) {
+            return event.end.getTime() < currentDate.getTime() });
+        return new BaseEvent(needs);
+    };
+    this.nextEventBase = function () {
+        var currentDate = new Date();
+        var needs = this.events.filter(function(event) {
+            return event.start.getTime() > currentDate.getTime();
+        });
+        return new BaseEvent(needs);
+    };
+    this.nowEventBase = function () {
+        var currentDate = new Date();
+        var needs = this.events.filter(function(event) {
+            return (event.start.getTime() <= currentDate.getTime() && event.end.getTime() >= currentDate.getTime());
+        });
+        return new BaseEvent(needs);
+    };
+    //СЃРѕР±С‹С‚РёРµ СЃ СѓС‡Р°СЃС‚РёРµРј РґСЂСѓРіР° (Р”СЂСѓРі РѕС‚РЅРѕС€РµРЅРёРµ СЂРµС„Р»РµРєСЃРёРІРЅРѕРµ ^^)
+    this.withFriend = function (myFriend) {
+        var needs = this.events.filter(function(event) {
+            return event.parties.some(function(party) {
+                return party.name == myFriend.name;
+            })
+        });
+        return new BaseEvent(needs);
+    };
+    // РЎРѕР±С‹С‚РёСЏ С‡РµСЂРµР· РїРµСЂРёРѕРґ РІСЂРµРјРµРЅРё РґРµРЅСЊ, РЅРµРґРµР»СЏ, РјРµСЃСЏС†
+    this.getEventAfterWeek = function () {
+        var currentDate = new Date();
+        currentDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        var needs = this.events.filter(function(event) {
+            return event.start.getTime() > currentDate.getTime()
+        });
+        return new BaseEvent(needs);
+    };
+    this.getEventAfterDay = function () {
+        var currentDate = new Date();
+        currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        var needs = this.events.filter(function(event) {
+            return event.start.getTime() > currentDate.getTime() 
+        });
+        return new BaseEvent(needs);
+    };
+    this.getEventAfterMonth = function () {
+        var currentDate = new Date();
+        if (currentDate.getMonth() == 11) {
+            currentDate = new Date(currentDate.getFullYear() + 1, 0, currentDate.getDay());
+        } else {
+            currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDay());
+        };
+        var needs = this.events.filter(function(event) {
+            return event.start.getTime() > currentDate.getTime() 
+        });
+        return new BaseEvent(needs);
+    };
+    // РЎРѕР±С‹С‚РёСЏ Р·Р° РїРµСЂРёРѕРґ
+    this.getEventFromPeriod = function (fromDate, toDate) {
+        var needs = this.event.filter(function(event) {
+            return (event.start.getTime() > fromDate.getTime() && event.finish.getTime() < toDate.getTime());
+        });
+        return new BaseEvent(needs);
+    }
     
-    bestOfSweets.setLocation({gps :{x = 15, y = 189, name : "Австрия, Бургенланд - Айзенштадте, Фестиваль сладких вин"}});
-    сirioDeNazare.setLocation({gps :{x = 45, y = 133, name : "Бразилия, Белен, Фестиваль Cirio De Nazare"}});
-    vinesDay.setLocation({gps :{x = 45, y = 133, name : "Венгрия, Мор, День вина"}});
-    theBlackCountry.setLocation({gps :{x = 45, y = 133, name : "Великобритания, Дадли, Вкус 'Черной страны'"}});
-    oktoberFest.setLocation({gps :{x = 45, y = 133, name : "Германия, Мюнхен, OktoberFest"}});
-    francfurtBook.setLocation({gps :{x = 45, y = 133, name : "Германия, Frankfurt, Франкфуртская международная книжная ярмарка"}});
-    aida.setLocation({gps :{x = 45, y = 133, name : "Египет, ?, Аида у великих пирамид, Гиза"}});
-    paradeOfLove.setLocation({gps :{x = 45, y = 133, name : "Израль, Тель-Авиве, Парад любви"}});
-    sukkot.setLocation({gps :{x = 45, y = 133, name : "Израль, Иерусалиме, праздник Суккот"}});
+    this.sortByStars = function () {
+        var events = this.events.slice(0);
+        var comparer = function compare(a,b) {
+            if (a.stars > b.stars)
+                return -1;
+            if (a.stars < b.stars)
+                return 1;
+            return 0;
+        };
+        events.sort(comparer);
+        return new BaseEvent(events);
+    }
+    
+    this.sortByDate = function () {
+        var events = this.events.slice(0);
+        var comparer = function compare(a,b) {
+            if (a.start.getTime() < b.start.getTime())
+                return -1;
+            if (a.start.getTime() > b.start.getTime())
+                return 1;
+            return 0;
+        };
+        events.sort(comparer);
+        return new BaseEvent(events);
+    }
 }
