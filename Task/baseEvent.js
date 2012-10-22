@@ -1,4 +1,20 @@
-﻿function BaseEvent(events) {
+﻿/**
+ * Shell for "sql" operations with Array Events.
+ *
+ * @constructor
+ * @method {pastEventBase} - Создает BaseEvent с пропущенными событиями
+ * @method {pastEventBase} - Создает BaseEvent с грядущими событиями
+ * @method {nowEventBase}  -  Создает BaseEvent с текущими событиями
+ * @method {withFriend}  -  Создает BaseEvent с событиями, в которых принимал участие определенный человек
+ * @method {getEventAfterDay}  -  Создает BaseEvent с грядущими событиями, которые наступят не раньше, чем через день
+ * @method {getEventAfterWeek}  -  Создает BaseEvent с грядущими событиями, которые наступят не раньше, чем через неделю
+ * @method {getEventAfterMonth}  -  Создает BaseEvent с грядущими событиями, которые наступят не раньше, чем через месяц
+ * @method {getEventFromPeriod}  -  Создает BaseEvent с событиями, которые лежат между двумы датами [fromDate, toDate]
+ * @method {getEventAfterMonth}  -  Создает BaseEvent с теми же событиями, но отсортированными по убыванию звезд
+ * @method {getEventAfterMonth}  -  Создает BaseEvent с теми же событиями, но отсортироваными по возрастанию даты
+ * @example - Смотри файл с тестами...
+ */
+function BaseEvent(events) {
     "use strict";
     this.events = events;
     //пропущенные, текущие, будущие события 
@@ -63,8 +79,8 @@
     };
     // События за период
     this.getEventFromPeriod = function (fromDate, toDate) {
-        var needs = this.event.filter(function (event) {
-            return (event.start.getTime() > fromDate.getTime() && event.finish.getTime() < toDate.getTime());
+        var needs = this.events.filter(function (event) {
+            return (event.start.getTime() > fromDate.getTime() && event.end.getTime() < toDate.getTime());
         });
         return new BaseEvent(needs);
     };

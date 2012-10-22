@@ -111,6 +111,16 @@ test('getEventAfterWeek()', function () {
     }));
     Date = RealDate;
 });
+test('getEventFromPeriod(from,to)', function () {
+    "use strict";
+    var testBase = initTestBase(), result;
+    result = testBase.getEventFromPeriod(new Date("September 12 2012 00:00:00"), new Date("September 14 2012 00:00:00"));
+    equal(result.events.length, 1);
+    ok(result.events.some(function (event) {
+        return event.id === 16;
+    }));
+});
+
 test('sortByStar()', function () {
     "use strict";
     var testBase = initTestBase(), sortByStarsEventbase = testBase.sortByStars();
