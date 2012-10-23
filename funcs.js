@@ -1,34 +1,34 @@
 ﻿function GetDates(collections) {
+    "use strict";
+
     return collections.map(function (events) {
         return events.start;
-    })
+    });
 }
 
-function sortfunction(a, b) {
+function sortByTime(a, b) {
     "use strict";
-    return a - b;
+    return a.start - b.start;
 }
 
 function Past(events) {
     "use strict";
 
-    var results = events
-    .filter(function (events) {
-        return events.start < new Date();
-    });
-    
-    return GetDates(results);
+    return events
+            .filter(function (events) {
+            return events.start < new Date();
+        })
+            .sort(sortByTime);
 }
 
 function Coming(events) {
     "use strict";
 
-    var results = events
-    .filter(function (events) {
-        return events.start > new Date();
-    });
-
-    return GetDates(results);
+    return events
+            .filter(function (events) {
+            return events.start > new Date();
+        })
+        .sort(sortByTime);
 }
 
 function ComeThrough(events, days) {
@@ -37,19 +37,20 @@ function ComeThrough(events, days) {
     var now = new Date();
     now.setDate(now.getDate() + days);
 
-    return Coming(events)
-    .filter(function (dates) {
-        return dates < now;
-    });
+    return new Coming(events)
+         .filter(function (events) {
+            return events.start < now;
+        })
+        .sort(sortByTime);
 }
 
 function SortByTime(events, isAscending) {
     "use strict";
 
-    var results = GetDates(events);
-
     if (!isAscending) {
-        return results.reverse();
+        return events
+               .sort(sortByTime)
+               .reverse();
     }
-    return results;
+    return events.sort(sortByTime);
 }
