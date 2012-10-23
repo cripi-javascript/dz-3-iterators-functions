@@ -77,19 +77,41 @@ for (var nameIndex in nameArray) {
 	}));
 };
 //Закончили формировать случайные объекты. Переходим к выборке.
+function isData(data) {
+	"use strict";
+     if (typeof data === 'undefined') {return false;}
+     return data;}
+function Flt(A,varHash){ // filterFieldHash, sortedField, next, prew
+	varHash = varHash || {};
+	curDate = isData(varHash['date']) || new Date();
+	next = isData(varHash['next']);
+	prew = isData(varHash['prew']);
+	filterField =isData(varHash['filterField']) || {};
+	sortedField = isData(varHash['sortedField']) || 'start';	
+	if (next===true) {
+		return A.filter(function (event){ //after - грядущие
+			return event.start >= curDate;
+		})};
+	if (prew==true){
+		return A.filter(function (event){ //pre - предыдущие
+			return event.end < curDate;
+		})};
 
-function Flt(A, filterFieldHash, sortedField){
-	'use strict'
-	filterFieldHash = filterFieldHash || {'people':'Goga'};
-	sortedField = sortedField || 'start';
-	//Выборка по значению поля
-	for (var field in filterFieldHash){
+	//Проверка вхождения
+	function inArray(looking_for, list){
+		for(i in list){
+			if(looking_for == list[i]){
+            return true;
+			}
+		}
+		return false;
+	};
+	for (var field in filterField){
+	
 		A = A.filter(function(event){
-			return event[field] == filterFieldHash[field];
+			return inArray(filterField[field],event[field]);
 		});
 	};
-	console.log(A)
-	//Сортировка по полю
 	A.sort(function(a,b){
 	if (a[sortedField]>b[sortedField]){
 		return -1};
@@ -100,7 +122,12 @@ function Flt(A, filterFieldHash, sortedField){
 	return A;
 };
 
-console.log(Flt(eventArray));
+console.log(['Прошедшие события',Flt(eventArray,{'next':true})]);
+console.log(['Событие с конкретным участником'],Flt(eventArray,{'filterField':{'people':'Ruslan'}}));
+console.log(['Предстоящие события',Flt(eventArray,{'prew':true})]);
+console.log(['События после определённой даты',Flt(eventArray,{'date':new Date(2012,5), 'next':true})]);
+console.log(['Все события отсортированные по возрастанию', Flt(eventArray)]); // Убывание доделать
+console.log(['Сортировка по рейтингу события',Flt(eventArray,{'sortedField':'rank'})]);
 
 </script>
 
