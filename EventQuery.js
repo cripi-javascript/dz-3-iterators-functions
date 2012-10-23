@@ -1,15 +1,16 @@
+п»ї//utf-8
 var nameArray = ['Goga', 'Vasya', 'Petya', 'Zina', 'Ira', 'Masha', 'Dima', 'Tolya', 'Kolya', 'Marina', 'Gulya', 'Alyona', 'Zhenya', 'Ruslan', 'Uriy'];
-function Event(obj) { //Call, DateStart, DateFinish, Description, Parent, Childs, Comments, Peopleт, Location, Private, Rank, EvRS, Link
+function Event(obj) { //Call, DateStart, DateFinish, Description, Parent, Childs, Comments, PeopleС‚, Location, Private, Rank, EvRS, Link
     'use strict';
 	return obj || {};
 };
 var lectureJS1 = {"start": new Date(2012, 9, 3, 19, 00, 00),
         "end": new Date(2012, 9, 3, 20, 00, 00),
-		"name": "1 лекция по JavaScript",
-		"description": "Обзор языка",
+		"name": "1 Р»РµРєС†РёСЏ РїРѕ JavaScript",
+		"description": "РћР±Р·РѕСЂ СЏР·С‹РєР°",
 		"parent": {},
 		"childs": [lectureJS2, lectureJS3, lectureJS4],
-		"comments": ['Красивенько', 'А мы могли бы...'],
+		"comments": ['РљСЂР°СЃРёРІРµРЅСЊРєРѕ', 'Рђ РјС‹ РјРѕРіР»Рё Р±С‹...'],
 		"people": nameArray, 
 		"location": {},
 		"private": true, 
@@ -19,11 +20,11 @@ var lectureJS1 = {"start": new Date(2012, 9, 3, 19, 00, 00),
 	};
 var lectureJS2 = {"start":new Date(2012, 9, 10, 19, 00, 00),
         "end": new Date(2012, 9, 10, 21, 00, 00),
-		"name": "2 лекция по JavaScript",
-		"description": "Типы данных. Объекты. Statements. Expressions.",
+		"name": "2 Р»РµРєС†РёСЏ РїРѕ JavaScript",
+		"description": "РўРёРїС‹ РґР°РЅРЅС‹С…. РћР±СЉРµРєС‚С‹. Statements. Expressions.",
 		"parent": lectureJS1,
 		"childs": [lectureJS3, lectureJS4],
-		"comments": ['Можете вообще ничего не делать', 'Можно ли перенести на 19:30?'],
+		"comments": ['РњРѕР¶РµС‚Рµ РІРѕРѕР±С‰Рµ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ', 'РњРѕР¶РЅРѕ Р»Рё РїРµСЂРµРЅРµСЃС‚Рё РЅР° 19:30?'],
 		"people": nameArray, 
 		"location": {},
 		"private": true, 
@@ -33,11 +34,11 @@ var lectureJS2 = {"start":new Date(2012, 9, 10, 19, 00, 00),
 	};
 var lectureJS3 = {"start":new Date(2012, 9, 17, 19, 30, 00),
         "end": new Date(2012, 9, 17, 21, 00, 00),
-		"name": "3 лекция по JavaScript",
-		"description": "Итераторы и циклы",
+		"name": "3 Р»РµРєС†РёСЏ РїРѕ JavaScript",
+		"description": "РС‚РµСЂР°С‚РѕСЂС‹ Рё С†РёРєР»С‹",
 		"parent": lectureJS2,
 		"childs": [lectureJS4],
-		"comments": ['Можете вообще ничего не делать', 'Можно ли перенести на 19:30?'],
+		"comments": ['РњРѕР¶РµС‚Рµ РІРѕРѕР±С‰Рµ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ', 'РњРѕР¶РЅРѕ Р»Рё РїРµСЂРµРЅРµСЃС‚Рё РЅР° 19:30?'],
 		"people": nameArray, 
 		"location": {},
 		"private": true, 
@@ -47,8 +48,8 @@ var lectureJS3 = {"start":new Date(2012, 9, 17, 19, 30, 00),
 	};
 var lectureJS4 = {"start":new Date(2012, 9, 24, 18, 30, 00),
         "end": new Date(2012, 9, 24, 21, 00, 00),
-		"name": "4 лекция по JavaScript",
-		"description": "ООП, которого нет",
+		"name": "4 Р»РµРєС†РёСЏ РїРѕ JavaScript",
+		"description": "РћРћРџ, РєРѕС‚РѕСЂРѕРіРѕ РЅРµС‚",
 		"parent": lectureJS3,
 		"childs": [],
 		"comments": [],
@@ -64,14 +65,14 @@ for (var nameIndex in nameArray) {
 	var randomnumber = Math.random()*nameIndex;
 	eventArray[eventArray.length]=(Event({
 	'people':[nameArray[nameIndex]],
-	'name'  : "Ещё одно событие"+nameIndex,
+	'name'  : "Р•С‰С‘ РѕРґРЅРѕ СЃРѕР±С‹С‚РёРµ"+nameIndex,
 	'start' : new Date(2012, randomnumber, randomnumber*(1+Math.random()), 10+randomnumber*Math.random(), 00, 00),
 	'end'   : new Date(2012, randomnumber, randomnumber*2, 11+randomnumber, 30, 00),
 	'rank'  : (Math.random()*5).toFixed(0),
 	'EvRS'  : 16,
 	}));
 };
-//Закончили формировать случайные объекты. Переходим к выборке.
+//Р—Р°РєРѕРЅС‡РёР»Рё С„РѕСЂРјРёСЂРѕРІР°С‚СЊ СЃР»СѓС‡Р°Р№РЅС‹Рµ РѕР±СЉРµРєС‚С‹. РџРµСЂРµС…РѕРґРёРј Рє РІС‹Р±РѕСЂРєРµ.
 function isData(data) {
 	"use strict";
      if (typeof data === 'undefined') {return false;}
@@ -84,15 +85,15 @@ function Flt(A,varHash){ // filterFieldHash, sortedField, next, prew
 	filterField =isData(varHash['filterField']) || {};
 	sortedField = isData(varHash['sortedField']) || 'start';	
 	if (next===true) {
-		return A.filter(function (event){ //after - грядущие
+		return A.filter(function (event){ //after - РіСЂСЏРґСѓС‰РёРµ
 			return event.start >= curDate;
 		})};
 	if (prew==true){
-		return A.filter(function (event){ //pre - предыдущие
+		return A.filter(function (event){ //pre - РїСЂРµРґС‹РґСѓС‰РёРµ
 			return event.end < curDate;
 		})};
 
-	//Проверка вхождения
+	//РџСЂРѕРІРµСЂРєР° РІС…РѕР¶РґРµРЅРёСЏ
 	function inArray(looking_for, list){
 		for(i in list){
 			if(looking_for == list[i]){
@@ -117,9 +118,9 @@ function Flt(A,varHash){ // filterFieldHash, sortedField, next, prew
 	return A;
 };
 
-console.log(['Прошедшие события',Flt(eventArray,{'next':true})]);
-console.log(['Событие с конкретным участником'],Flt(eventArray,{'filterField':{'people':'Ruslan'}}));
-console.log(['Предстоящие события',Flt(eventArray,{'prew':true})]);
-console.log(['События после определённой даты',Flt(eventArray,{'date':new Date(2012,5), 'next':true})]);
-console.log(['Все события отсортированные по возрастанию', Flt(eventArray)]); // Убывание доделать
-console.log(['Сортировка по рейтингу события',Flt(eventArray,{'sortedField':'rank'})]);
+console.log(['РџСЂРѕС€РµРґС€РёРµ СЃРѕР±С‹С‚РёСЏ',Flt(eventArray,{'next':true})]);
+console.log(['РЎРѕР±С‹С‚РёРµ СЃ РєРѕРЅРєСЂРµС‚РЅС‹Рј СѓС‡Р°СЃС‚РЅРёРєРѕРј'],Flt(eventArray,{'filterField':{'people':'Ruslan'}}));
+console.log(['РџСЂРµРґСЃС‚РѕСЏС‰РёРµ СЃРѕР±С‹С‚РёСЏ',Flt(eventArray,{'prew':true})]);
+console.log(['РЎРѕР±С‹С‚РёСЏ РїРѕСЃР»Рµ РѕРїСЂРµРґРµР»С‘РЅРЅРѕР№ РґР°С‚С‹',Flt(eventArray,{'date':new Date(2012,5), 'next':true})]);
+console.log(['Р’СЃРµ СЃРѕР±С‹С‚РёСЏ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Рµ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ', Flt(eventArray)]); // РЈР±С‹РІР°РЅРёРµ РґРѕРґРµР»Р°С‚СЊ
+console.log(['РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЂРµР№С‚РёРЅРіСѓ СЃРѕР±С‹С‚РёСЏ',Flt(eventArray,{'sortedField':'rank'})]);
