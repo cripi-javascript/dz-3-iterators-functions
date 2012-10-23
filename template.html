@@ -95,7 +95,13 @@ function Flt(A, fieldHash){
 	});
 
 	var sortedBy = A
-	.sort(function(a,b){if (a.start>b.start){return 1}}); //Хочу передать критерий сортировки из хеша.
+	.sort(function(a,b){
+	if (a.start>b.start){
+		return -1};
+	if (a.start<b.start) {
+		return 1};
+	return 0;
+	}); //Хочу передать критерий сортировки из хеша.
 	////////////////////////////
 	return [sortedBy];
 };
