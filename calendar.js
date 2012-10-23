@@ -48,8 +48,11 @@ function event(obj) {
     }
 
     if (!isDate(obj.end)) {
-        alert("Error! Not event object!");
-        return;
+        obj.end = obj.start;
+    }
+
+    if (obj.end < obj.start) {
+        obj.end = obj.start;
     }
 
     return {
@@ -62,6 +65,11 @@ function event(obj) {
     };
 }
 
+/**
+ * Возвращает строковое представление объекта типа event
+ * @param {events} - объект типа event
+ * @return строковое представление event
+*/
 event.show = function (events) {
     "use strict";
 
@@ -78,7 +86,7 @@ function test(obj) {
 
     var result = event(obj);
     if (typeof result !== 'undefined') {
-        alert(show(result));
+        alert(event.show(result));
     }
 }
 
