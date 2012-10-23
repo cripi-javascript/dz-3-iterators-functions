@@ -78,37 +78,30 @@ for (var nameIndex in nameArray) {
 };
 //Закончили формировать случайные объекты. Переходим к выборке.
 
-function Flt(A, fieldHash){
+function Flt(A, filterFieldHash, sortedField){
 	'use strict'
-	var fieldHash = fieldHash || {'name':'Goga'};
-	//////////////////////////////////////////////////////////
-	var after = A.filter(function (event){ //after - грядущие
-			return event.end >= new Date();
-		});
-	////////////////////////////////////////////////////////
-	var pre = A.filter(function (event){ //pre - предыдущие
-			return event.end < new Date();
-		});
+	filterFieldHash = filterFieldHash || {'people':'Goga'};
+	sortedField = sortedField || 'start';
 	//Выборка по значению поля
-	var forField = A.filter(function(event){
-		return event.name == '' //Вопрос: как подставить значение атрибута, хранящееся в виде ключа в хеше? чтобы вместо .name написать что-то связанное с fieldHash
-	});
-
-	var sortedBy = A
-	.sort(function(a,b){
-	if (a.start>b.start){
+	for (var field in filterFieldHash){
+		A = A.filter(function(event){
+			return event[field] == filterFieldHash[field];
+		});
+	};
+	console.log(A)
+	//Сортировка по полю
+	A.sort(function(a,b){
+	if (a[sortedField]>b[sortedField]){
 		return -1};
-	if (a.start<b.start) {
+	if (a[sortedField]<b[sortedField]) {
 		return 1};
 	return 0;
-	}); //Хочу передать критерий сортировки из хеша.
-	////////////////////////////
-	return [sortedBy];
+	});
+	return A;
 };
-/**for (var indx in eventArray){
-	console.log(eventArray[indx]);
-};*/
+
 console.log(Flt(eventArray));
+
 </script>
 
 
