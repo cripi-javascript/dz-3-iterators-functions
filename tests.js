@@ -1,7 +1,8 @@
-﻿test( "hello test", function() {
+﻿test("hello test", function() {
+    "use strict";
 
-    var results = ComeThrough(collection, 20);
-
+    var result = new Past(collection);
+    var results = new SortByTime(result);
     console.log("Result: " + results.map (function (events){
         return "\n" + event.show(events);
     }));

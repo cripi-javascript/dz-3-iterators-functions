@@ -1,15 +1,4 @@
 ﻿/**
- * Функция для стандартной сортировки js
- * Сортирует коллекцию объектов типа Event на основании поля start
- * @param {a, b} два события для сравнения 
- * @return возвращает разницу
-*/
-function sortByTime(a, b) {
-    "use strict";
-    return a.start - b.start;
-}
-
-/**
  * Возвращает прошедшие события, отсортированные по дате начала
  * @param {events} - коллекция объектов типа event
  * @return коллекция объектов типа event
@@ -18,10 +7,9 @@ function Past(events) {
     "use strict";
 
     return events
-            .filter(function (events) {
+           .filter(function (events) {
             return events.start < new Date();
-        })
-            .sort(sortByTime);
+           });
 }
 
 /**
@@ -32,11 +20,9 @@ function Past(events) {
 function Coming(events) {
     "use strict";
 
-    return events
-            .filter(function (events) {
-            return events.start > new Date();
-        })
-        .sort(sortByTime);
+    return events.filter(function (events) {
+                  return events.start > new Date();
+                 });
 }
 
 /**
@@ -52,10 +38,9 @@ function ComeThrough(events, days) {
     now.setDate(now.getDate() + days);
 
     return new Coming(events)
-         .filter(function (events) {
-            return events.start < now;
-        })
-        .sort(sortByTime);
+                    .filter(function (events) {
+                     return events.start < now;
+                    });
 }
 
 /**
@@ -69,10 +54,31 @@ function ComeThrough(events, days) {
 function SortByTime(events, isAscending) {
     "use strict";
 
-    if (!isAscending) {
-        return events
-               .sort(sortByTime)
-               .reverse();
+    if (isAscending || typeof isAscending === "undefined") {
+        return event
+               .sortByStartTime(events)
     }
-    return events.sort(sortByTime);
+    return events
+            .sortByStartTime(events)
+            .reverse();
+}
+
+/**
+ * Возвращает события, отсортированные по рейтингу по  убыв/возрастанию 
+ * от с более высоким рейтингом к самому низко приоритетному / наоборот. По умолчанию сортирует в порядке убывания
+ * @param {events} - коллекция объектов типа event
+ * @param {isAscending} - необязательный параметр - указывает порядок сортировки. 
+ * при отсутсвии сортируется по убыванию.
+ * @return коллекция объектов типа event
+*/
+function SortByRaiting(events, isAscending) {
+    "use strict";
+
+    if (isAscending || typeof isAscending === "undefined") {
+        return event
+               .sortByRaiting(events);
+    }
+    return events
+            .sortByRaiting(events)
+            .reverse();
 }

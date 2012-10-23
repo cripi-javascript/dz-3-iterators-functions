@@ -41,6 +41,7 @@ function event(obj) {
 
 
     var remindTime = obj.remindTime || 0;
+    obj.raiting = obj.raiting || 0;
 
     if (!isDate(obj.start)) {
         alert("Error! Not event object!");
@@ -61,7 +62,8 @@ function event(obj) {
         "end": obj.end,
         "location": obj.location || "",
         "remindTime": remindTime,
-        "description": obj.description || "(отсутствует)"
+        "description": obj.description || "(отсутствует)",
+        "raiting": obj.raiting
     };
 }
 
@@ -80,6 +82,25 @@ event.show = function (events) {
         + " место события: "  + events.location + " напомнить за " + events.remindTime + " минут" + "\n"
         + " описание: " + events.description + "\n";
 }
+
+function sortFactory(selector) {
+
+    return function (array) {
+        return array.sort(selector);
+    }
+};
+
+event.sortByStartTime = sortFactory(function (a, b) {
+    return a.start - b.start;
+});
+
+event.sortByEndTime = sortFactory(function (item) {
+    return a.end - b.end;
+});
+
+event.sortByRaiting = sortFactory(function (item) {
+    return a.raiting - b.raiting;
+});
 
 function test(obj) {
     "use strict";
