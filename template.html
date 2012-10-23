@@ -26,7 +26,7 @@ var lectureJS1 = {"start":new Date(2012, 9, 3, 19, 00, 00), "end": new Date(2012
 		"Link": 'http://cripi.ru/#javascript' 
 	};
 var lectureJS2 = {"start":new Date(2012, 9, 10, 19, 00, 00), "end": new Date(2012, 9, 10, 21, 00, 00),
-		"name": "3 лекция по JavaScript",
+		"name": "2 лекция по JavaScript",
 		"description": "Типы данных. Объекты. Statements. Expressions.",
 		"parent": lectureJS1,
 		"childs": [],
@@ -64,7 +64,7 @@ var lectureJS4 = {"start":new Date(2012, 9, 24, 18, 30, 00), "end": new Date(201
 		"EvRS": 16,		
 		"Link": 'http://cripi.ru/#javascript' 
 	};
-var eventArray = [lectureJS1, lectureJS2, lectureJS3, lectureJS4];
+var eventArray = [ lectureJS3, lectureJS4,lectureJS1, lectureJS2];
 for (var nameIndex in nameArray) {
 	var randomnumber = Math.random()*nameIndex;
 	eventArray[eventArray.length]=(Event({
@@ -93,8 +93,11 @@ function Flt(A, fieldHash){
 	var forField = A.filter(function(event){
 		return event.name == '' //Вопрос: как подставить значение атрибута, хранящееся в виде ключа в хеше? чтобы вместо .name написать что-то связанное с fieldHash
 	});
+
+	var sortedBy = A
+	.sort(function(a,b){if (a.start>b.start){return 1}}); //Хочу передать критерий сортировки из хеша.
 	////////////////////////////
-	return [after, pre];
+	return [sortedBy];
 };
 /**for (var indx in eventArray){
 	console.log(eventArray[indx]);
