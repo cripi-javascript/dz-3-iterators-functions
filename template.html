@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Title</title>
+</head>
+<body>
+<p>Тестовый шаблон</p>
+<script>
+var nameArray = ['Goga', 'Vasya', 'Petya', 'Zina', 'Ira', 'Masha', 'Dima', 'Tolya', 'Kolya', 'Marina', 'Gulya', 'Alyona', 'Zhenya', 'Ruslan', 'Uriy'];
+function Event(obj) { //Call, DateStart, DateFinish, Description, Parent, Childs, Comments, Peopleт, Location, Private, Rank, EvRS, Link
+    'use strict';
+	return obj || {}
+};
+var lectureJS1 = {"start":new Date(2012, 9, 3, 19, 00, 00), "end": new Date(2012, 9, 3, 20, 00, 00),
+		"name": "1 лекция по JavaScript",
+		"description": "Обзор языка",
+		"parent": {},
+		"childs": [lectureJS2,lectureJS3,lectureJS4],
+		"comments": ['Красивенько', 'А мы могли бы...'],
+		"people": nameArray, 
+		"location": {},
+		"private": true, 
+		"rank": 4,		
+		"EvRS": 16,		
+		"Link": 'http://cripi.ru/#javascript' 
+	};
+var lectureJS2 = {"start":new Date(2012, 9, 10, 19, 00, 00), "end": new Date(2012, 9, 10, 21, 00, 00),
+		"name": "3 лекция по JavaScript",
+		"description": "Типы данных. Объекты. Statements. Expressions.",
+		"parent": lectureJS1,
+		"childs": [],
+		"comments": ['Можете вообще ничего не делать', 'Можно ли перенести на 19:30?'],
+		"people": nameArray, 
+		"location": {},
+		"private": true, 
+		"rank": 4,		
+		"EvRS": 16,		
+		"Link": 'http://cripi.ru/#javascript' 
+	};
+var lectureJS3 = {"start":new Date(2012, 9, 17, 19, 30, 00), "end": new Date(2012, 9, 17, 21, 00, 00),
+		"name": "3 лекция по JavaScript",
+		"description": "Итераторы и циклы",
+		"parent": lectureJS2,
+		"childs": [],
+		"comments": ['Можете вообще ничего не делать', 'Можно ли перенести на 19:30?'],
+		"people": nameArray, 
+		"location": {},
+		"private": true, 
+		"rank": 3,		
+		"EvRS": 16,		
+		"Link": 'http://cripi.ru/#javascript' 
+	};
+var lectureJS4 = {"start":new Date(2012, 9, 24, 18, 30, 00), "end": new Date(2012, 9, 24, 21, 00, 00),
+		"name": "4 лекция по JavaScript",
+		"description": "ООП, которого нет",
+		"parent": lectureJS3,
+		"childs": [],
+		"comments": [],
+		"people": nameArray, 
+		"location": {},
+		"private": true, 
+		"rank": 0,		
+		"EvRS": 16,		
+		"Link": 'http://cripi.ru/#javascript' 
+	};
+var eventArray = [lectureJS1, lectureJS2, lectureJS3, lectureJS4];
+for (var nameIndex in nameArray) {
+	var randomnumber = Math.random()*nameIndex;
+	eventArray[eventArray.length]=(Event({
+	'people':[nameArray[nameIndex]],
+	'name'  : "Ещё одно событие"+nameIndex,
+	'start' : new Date(2012, randomnumber, randomnumber*(1+Math.random()), 10+randomnumber*Math.random(), 00, 00),
+	'end'   : new Date(2012, randomnumber, randomnumber*2, 11+randomnumber, 30, 00),
+	'rank'  : (Math.random()*5).toFixed(0),
+	'EvRS'  : 16,
+	}));
+};
+//Закончили формировать случайные объекты. Переходим к выборке.
+
+function Flt(A, fieldHash){
+	'use strict'
+	var fieldHash = fieldHash || {'name':'Goga'};
+	//////////////////////////////////////////////////////////
+	var after = A.filter(function (event){ //after - грядущие
+			return event.end >= new Date();
+		});
+	////////////////////////////////////////////////////////
+	var pre = A.filter(function (event){ //pre - предыдущие
+			return event.end < new Date();
+		});
+	//Выборка по значению поля
+	var forField = A.filter(function(event){
+		return event.name == '' //Вопрос: как подставить значение атрибута, хранящееся в виде ключа в хеше? чтобы вместо .name написать что-то связанное с fieldHash
+	});
+	////////////////////////////
+	return [after, pre];
+};
+/**for (var indx in eventArray){
+	console.log(eventArray[indx]);
+};*/
+console.log(Flt(eventArray));
+</script>
+
+
+
+</body>
+</html>
