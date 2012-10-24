@@ -217,7 +217,7 @@ function isMore(a,b) {
     return a > b;
 }
 function isLess(a,b) {
-    return a > b;
+    return a < b;
 }
 function isEqual(a,b) {
     return a === b;
@@ -265,4 +265,43 @@ var withAlex_eho = eventList.filter(function (item) {
 })
 console.log("Выбрать события с моим участием  http://vk.com/alex_eho");
 console.log(withAlex_eho);
+
+//Выбрать мероприятия проходяшие в одно вемя
+var atOneTime = eventList.map(function (item, index, array) {
+
+    var MoreThisItemStart = partial(isMore,item.startEvent);
+    var LessThisItemEnd = partial(isLess,item.endEvent);
+    var EqualThisItemEnd = partial(isEqual,item.endEvent);
+    return array
+        .map(function (el, index, array) {
+                if (MoreThisItemStart(el.startEvent)){
+                    return el
+                }
+            }
+        )
+        .map(function (el) {
+            if (!el) return
+            if (LessThisItemEnd(el.endEvent)){
+                return el
+            }
+        }
+    );
+})
+console.log("Выбрать мероприятия проходяшие в одно вемя");
+console.log(atOneTime);
+
+//сортировка по старту мероприятий
+var sortStartEvinte = eventList.sort(function (a,b) {
+    return 0+isMore( a.startEvent.getTime(), b.startEvent.getTime())
+})
+console.log("исходный масив");
+eventList.forEach(function (item) {
+    console.log(item.startEvent)
+    }
+)
+console.log("сортировка по старту мероприятий");
+sortStartEvinte.forEach(function (item) {
+    console.log(item.startEvent)
+    }
+)
 
