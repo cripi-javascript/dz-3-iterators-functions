@@ -72,3 +72,54 @@ var events = [
     Event("s53m0j6u9j", "bk9y4szr2s", EventTime(new Date(2012, 9, 7), 45), ["Иванов", "я"], 5),         // 20
     Event("lkajbmx7y2", "vwzpu1xl0o", EventTime(new Date(2012, 9, 20), 45), ["Иванов", "я", "Петров"], 1)//21
 ];
+
+
+/**
+* Прошедшее событие
+*
+* @param {Object} event Событие
+*
+* @return {Boolean}
+*/
+function OldEvent(event) {
+    return event.time.start < Date.now();
+}
+
+/**
+* Событие с моим участием
+*
+* @param {Object} event Событие
+*
+* @return {Boolean}
+*/
+function MyParticipationEvent(event, name) {
+    return event.member.some(function (member) {
+        return member == name;
+    });
+}
+
+/**
+* Предстоящее событие
+*
+* @param {Object} event Событие
+*
+* @return {Boolean}
+*/
+function NewEvent(event) {
+    return event.time.start > Date.now();
+}
+
+/**
+* Предстоящее событие
+*
+* @param {Object} event Событие
+*
+* @return {Boolean}
+*/
+function NewEvent(event) {
+    return event.time.start > Date.now();
+}
+
+function Selection() {
+    console.log(events.filter(MyParticipationEvent).length);
+}
