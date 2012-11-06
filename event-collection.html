@@ -11,7 +11,9 @@
 
     <div class="container">
 
-	<input type="button" onclick="console.log(getNextHappenDate(events[0]));" value = "test"/>
+	<input type="button" onclick="console.dir(thisWeekEvents(futureEvents(events)));" value = "будущие события недели"/>
+	<input type="button" onclick="console.dir(sortByStartDate(partyEvents(futureEvents(events))));" value = "будущие пьянки, отсортированные по дате"/>
+	<input type="button" onclick="console.dir(sortByNextHappenDate(nightAlarms(thisWeekEvents(futureEvents(events)))));" value = "события, которые меня разбудят на этой неделе"/>
 	
     </div> <!-- /container -->
 
