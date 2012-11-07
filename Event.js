@@ -58,7 +58,7 @@ var events = [
     Event("3bdg49u3ez", "zwvyu91w3b", EventTime(new Date(2012, 10, 10), 45), ["Иванов", "Петров"]),     // 6
     Event("efc7dr20dx", "u641l89gw7", EventTime(new Date(2012, 9, 9)), ["Иванов", "я"]),                // 7
     Event("pqlv9jglxq", "nkb24jd7u6", EventTime(new Date(2012, 10, 29)), ["Петров"]),                   // 8
-    Event("iei2z6c63b", "kgzdrcs4mk", EventTime(new Date(2012, 11, 7)), ["я", "Петров"]),               // 9
+    Event("iei2z6c63b", "kgzdrcs4mk", EventTime(new Date(2012, 11, 9)), ["я", "Петров"]),               // 9
     Event("kygauxe4ub", "br0vzaikwr", EventTime(new Date(2012, 11, 27), 45), ["Иванов", "я"], 5),       // 10
     Event("ke4vd03xp8", "9k3bbogzz5", EventTime(new Date(2012, 11, 3), 45), ["Иванов"]),                // 11
     Event("jt4kew1ayg", "4q51wfulmd", EventTime(new Date(2012, 11, 29), 45), ["Иванов", "Петров"]),     // 12
@@ -72,54 +72,3 @@ var events = [
     Event("s53m0j6u9j", "bk9y4szr2s", EventTime(new Date(2012, 9, 7), 45), ["Иванов", "я"], 5),         // 20
     Event("lkajbmx7y2", "vwzpu1xl0o", EventTime(new Date(2012, 9, 20), 45), ["Иванов", "я", "Петров"], 1)//21
 ];
-
-
-/**
-* Прошедшее событие
-*
-* @param {Object} event Событие
-*
-* @return {Boolean}
-*/
-function OldEvent(event) {
-    return event.time.start < Date.now();
-}
-
-/**
-* Событие с моим участием
-*
-* @param {Object} event Событие
-*
-* @return {Boolean}
-*/
-function MyParticipationEvent(event, name) {
-    return event.member.some(function (member) {
-        return member == name;
-    });
-}
-
-/**
-* Предстоящее событие
-*
-* @param {Object} event Событие
-*
-* @return {Boolean}
-*/
-function NewEvent(event) {
-    return event.time.start > Date.now();
-}
-
-/**
-* Предстоящее событие
-*
-* @param {Object} event Событие
-*
-* @return {Boolean}
-*/
-function NewEvent(event) {
-    return event.time.start > Date.now();
-}
-
-function Selection() {
-    console.log(events.filter(MyParticipationEvent).length);
-}

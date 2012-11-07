@@ -1,10 +1,14 @@
- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
-        <title>�������</title>
-        <script language="javascript" type="text/javascript" src="Selection.js"></script>
+        <title>Выборки</title>
+        <script language="javascript" type="text/jscript" src="Event.js"></script>
+        <script language="javascript" type="text/jscript" src="SelectionFunctions.js"></script>
+        <script language="javascript" type="text/jscript" src="ComplexFunctions.js"></script>
     </head>
     <body>
-        <button onclick="Selection();">��������� �������</button>
+        <p>Выбрать все предстоящие события с моим участием отсортированные по рейтигу<button onclick="NewEventWithMeSortByRaiting();">Go</button></p>
+        <p>Выбрать все события, которые произойдут на этой неделе, отсортированые по рейтингу<button onclick="ThisWeekSortedByRaiting();">Go</button></p>
+        <p>Выбрать ближайшее (по времени) событие без моего участия<button onclick="FirstEventWithoutMe();">Go</button></p>
     </body>
 </html>
