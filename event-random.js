@@ -40,9 +40,9 @@ function getRandomString() {
 	length = getRandomInt(4, chars.length);
 	str = '';
 	for (i = 0; i < length; i++) {
-        str += getRandomElement(chars);
-    }
-    return str;
+		str += getRandomElement(chars);
+	}
+	return str;
 }
 
 /**

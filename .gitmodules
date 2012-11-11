@@ -1,0 +1,3 @@
+[submodule "dz-2-basics"]
+	path = dz-2-basics
+	url = git@github.com:turboDi/dz-2-basics.git
