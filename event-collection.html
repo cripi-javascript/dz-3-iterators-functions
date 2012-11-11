@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>EVents test</title>
+	</head>
+
+	<body>
+
+		<div class="container">
+
+			<input type="button" onclick="console.dir(thisWeekEvents(futureEvents(events)));" value = "будущие события недели"/>
+			<input type="button" onclick="console.dir(sortByStartDate(partyEvents(futureEvents(events))));" value = "будущие пьянки, отсортированные по дате"/>
+			<input type="button" onclick="console.dir(sortByNextHappenDate(nightAlarms(thisWeekEvents(futureEvents(events)))));" value = "события, которые меня разбудят на этой неделе"/>
+			
+		</div>
+
+		<script src="dz-2-basics/event.js"></script>
+		<script src="event-random.js"></script>
+		<script src="event-collection.js"></script>
+
+	</body>
+</html>
